@@ -2,6 +2,7 @@ import streamlit as st
 from agents import answer
 from ml_logic import classify_text, get_category_description
 import time
+import os
 
 # Set page configuration
 st.set_page_config(
@@ -79,6 +80,18 @@ def main():
         - ❓ **Questions** seeking information
         - ℹ️ **Informational** content
         """)
+        
+        # API Key input
+        st.markdown("### API Configuration")
+        api_key = st.text_input("Enter your Groq API Key:", type="password", 
+                               help="Required only for the 'Answer with Agent' feature")
+        
+        if api_key:
+            # Store the API key in session state
+            st.session_state.groq_api_key = api_key
+            st.success("API Key set! You can now use the agent.")
+        else:
+            st.warning("No API Key provided. Agent feature will be limited.")
     
     # Text input field
     user_text = st.text_area("Enter your text or question:", height=150)
@@ -90,12 +103,22 @@ def main():
     if col1.button("Answer with Agent 🤖", use_container_width=True):
         if user_text:
             with st.spinner("Generating response..."):
-                # Add a slight delay to show the spinner
-                time.sleep(0.5)
-                result = answer(user_text)
+                # Set API key for this request if available in session state
+                if hasattr(st.session_state, 'groq_api_key') and st.session_state.groq_api_key:
+                    # Temporarily set environment variable for this request
+                    os.environ["GROQ_API_KEY"] = st.session_state.groq_api_key
                 
-                st.markdown("### 🤖 Agent Response:")
-                st.write(result)
+                # Check if API key is available
+                if "GROQ_API_KEY" in os.environ and os.environ["GROQ_API_KEY"]:
+                    # Add a slight delay to show the spinner
+                    time.sleep(0.5)
+                    result = answer(user_text)
+                    
+                    st.markdown("### 🤖 Agent Response:")
+                    st.write(result)
+                else:
+                    st.error("⚠️ No Groq API key found. Please enter your API key in the sidebar.")
+                    st.info("You can get an API key from [Groq Console](https://console.groq.com/).")
         else:
             st.warning("⚠️ Please enter a question first.")
     
@@ -135,11 +158,15 @@ def main():
                 """, unsafe_allow_html=True)
                 
                 # Show example response based on category
-                if category == "question":
+                if category == "question" and hasattr(st.session_state, 'groq_api_key') and st.session_state.groq_api_key:
                     st.markdown("### 🤖 Suggested Response:")
                     with st.spinner("Generating answer to question..."):
+                        # Temporarily set environment variable for this request
+                        os.environ["GROQ_API_KEY"] = st.session_state.groq_api_key
                         response = answer(user_text)
                         st.write(response)
+                elif category == "question":
+                    st.info("💡 This appears to be a question. Add your Groq API key in the sidebar to get an automatic answer.")
         else:
             st.warning("⚠️ Please enter a text first.")
     
@@ -147,19 +174,20 @@ def main():
     with st.expander("How to use this application"):
         st.markdown("""
         ### Instructions:
-        1. **Answer with Agent**: Get detailed answers to your questions using a powerful language model
-        2. **Classify Text**: Analyze what type of content your text represents
+        1. **Enter your Groq API Key** in the sidebar (required for the Agent feature)
+        2. **Answer with Agent**: Get detailed answers to your questions using a powerful language model
+        3. **Classify Text**: Analyze what type of content your text represents
         
         ### Tips:
         - For best results with the agent, ask clear and specific questions
         - For classification, provide complete sentences or paragraphs
         - The classifier works best on English text
         
-        ### Setup:
-        Make sure to set up your `.env` file with your Groq API key:
-        ```
-        GROQ_API_KEY=your_key_here
-        ```
+        ### Getting a Groq API Key:
+        1. Create an account at [console.groq.com](https://console.groq.com/)
+        2. Navigate to API Keys section
+        3. Create a new API key
+        4. Copy and paste it into the sidebar
         """)
 
 if __name__ == "__main__":

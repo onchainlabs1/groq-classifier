@@ -9,14 +9,23 @@ A powerful tool that combines an LLM agent using the Groq API with a scikit-lear
 ![App Screenshot](https://via.placeholder.com/800x400?text=Groq+Classifier+Screenshot)
 <!-- Replace the placeholder above with an actual screenshot of your application when available -->
 
-## The Cursor AI Challenge
+## The 1-Hour Cursor AI Challenge
 
-This project was developed as a coding challenge using only **Cursor AI** - an AI-powered code editor. The entire application, including all features, was built in a single development session with AI assistance. This approach demonstrates:
+This project was developed as a speed-coding challenge: **build a complete AI application in under 1 hour using only Cursor AI**. The entire application, including all features, was built in a single development session with AI assistance, demonstrating the power of AI-powered development tools for rapid prototyping.
 
-- Rapid prototyping capabilities with AI-assisted development
-- Combining modern LLMs with traditional ML techniques
-- Building end-to-end applications with minimal time investment
+This challenge highlights:
+
+- Rapid prototype-to-production development with AI assistance
+- Building a full-stack application in record time (under 1 hour!)
+- Seamlessly combining modern LLMs with traditional ML techniques
 - Creating production-ready code with comprehensive testing and documentation
+
+## Live Demo
+
+Try the application live on Streamlit Cloud:
+[Groq Classifier App](https://groq-classifier.streamlit.app) <!-- Update with your actual Streamlit Cloud URL -->
+
+Note: When using the live demo, you'll need to provide your own Groq API key to use the LLM agent functionality. The text classification works without an API key.
 
 ## Features
 
@@ -29,6 +38,7 @@ This project was developed as a coding challenge using only **Cursor AI** - an A
 - **Streamlit Interface**: User-friendly interface with responsive design and visual feedback
 - **Data Analysis Dashboard**: Complete analytics tools with visualizations and batch processing
 - **Confidence Scoring**: Provides uncertainty detection when classification confidence is low
+- **Direct API Key Input**: Enter your Groq API key directly in the interface (no configuration files needed)
 
 ## Tech Stack
 
@@ -85,15 +95,12 @@ This project was developed as a coding challenge using only **Cursor AI** - an A
    pip install -r requirements.txt
    ```
 
-3. Create a `.env` file in the project root:
-   ```
-   GROQ_API_KEY=your_groq_api_key_here
-   ```
-
-4. Run the application:
+3. Run the application:
    ```bash
    streamlit run app.py
    ```
+
+4. Enter your Groq API key in the sidebar (if you want to use the LLM features)
 
 ## Additional Applications
 
@@ -119,7 +126,7 @@ Tools for exporting classification results and model statistics.
 
 ## Development Process
 
-This project was built using Cursor AI to demonstrate how modern AI-assisted development can accelerate creation of complex applications. The entire development process took place in a single session, including:
+This project was built using Cursor AI to demonstrate how modern AI-assisted development can accelerate creation of complex applications. The entire development process took place in a single session lasting less than 1 hour, including:
 
 1. Setting up the core architecture
 2. Implementing the ML classification system
@@ -130,6 +137,17 @@ This project was built using Cursor AI to demonstrate how modern AI-assisted dev
 7. Writing detailed documentation
 
 This approach showcases the potential of AI-assisted coding for rapid prototyping and development of production-ready applications.
+
+## Deploy Your Own Version
+
+You can easily deploy this project to Streamlit Cloud:
+
+1. Fork this repository to your GitHub account
+2. Visit [Streamlit Cloud](https://streamlit.io/cloud) and sign in with GitHub
+3. Deploy a new app, selecting your forked repository
+4. Set the main file path to `app.py`
+5. Optionally, add your Groq API key as a secret named `GROQ_API_KEY`
+6. Deploy and share your app!
 
 ## Documentation
 
