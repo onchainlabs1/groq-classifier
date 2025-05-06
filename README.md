@@ -2,11 +2,21 @@
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/onchainlabs1/groq-classifier)
 ![License](https://img.shields.io/badge/license-MIT-blue)
+![Made with Cursor](https://img.shields.io/badge/Made_with-Cursor_AI-blue?logo=cursor&logoColor=white)
 
-A powerful tool that combines an LLM agent using the Groq API with a scikit-learn-based text classifier.
+A powerful tool that combines an LLM agent using the Groq API with a scikit-learn-based text classifier, built entirely using Cursor AI as a development challenge.
 
 ![App Screenshot](https://via.placeholder.com/800x400?text=Groq+Classifier+Screenshot)
 <!-- Replace the placeholder above with an actual screenshot of your application when available -->
+
+## The Cursor AI Challenge
+
+This project was developed as a coding challenge using only **Cursor AI** - an AI-powered code editor. The entire application, including all features, was built in a single development session with AI assistance. This approach demonstrates:
+
+- Rapid prototyping capabilities with AI-assisted development
+- Combining modern LLMs with traditional ML techniques
+- Building end-to-end applications with minimal time investment
+- Creating production-ready code with comprehensive testing and documentation
 
 ## Features
 
@@ -17,7 +27,18 @@ A powerful tool that combines an LLM agent using the Groq API with a scikit-lear
   - ❓ **Question**: Identifies questions seeking information
   - ℹ️ **Informational**: Identifies text providing factual information
 - **Streamlit Interface**: User-friendly interface with responsive design and visual feedback
+- **Data Analysis Dashboard**: Complete analytics tools with visualizations and batch processing
 - **Confidence Scoring**: Provides uncertainty detection when classification confidence is low
+
+## Tech Stack
+
+- **[LangChain](https://langchain.com/)**: Framework for working with LLMs
+- **[Groq API](https://groq.com/)**: Ultra-fast LLM inference API
+- **[scikit-learn](https://scikit-learn.org/)**: Machine learning tools and algorithms
+- **[Streamlit](https://streamlit.io/)**: Web application framework for data apps
+- **[Pandas](https://pandas.pydata.org/)**: Data manipulation and analysis
+- **[Matplotlib](https://matplotlib.org/)**: Data visualization
+- **[Python-dotenv](https://pypi.org/project/python-dotenv/)**: Environment variable management
 
 ## Screenshots
 
@@ -74,53 +95,45 @@ A powerful tool that combines an LLM agent using the Groq API with a scikit-lear
    streamlit run app.py
    ```
 
-## Usage Examples
+## Additional Applications
 
-### Using the LLM Agent
+Beyond the main classifier interface, this project includes:
 
-1. Enter your question in the text field
-2. Click "Answer with Agent 🤖"
-3. Wait for the response to be generated
-
-Example questions:
-- "What is machine learning?"
-- "How does the Groq API work?"
-- "Explain the difference between classification and regression"
-
-### Using the Text Classifier
-
-1. Enter the text you want to classify in the text field
-2. Click "Classify Text 🔍"
-3. View the classification result
-
-Example texts to classify:
-- "I love this product, it's amazing!" (Positive)
-- "This is terrible quality, don't buy it" (Negative)
-- "When will my order arrive?" (Question)
-- "The store opens at 9am and closes at 6pm" (Informational)
-
-## Development
-
-### Project Structure
-
-```
-groq-classifier/
-├── agents.py        # LLM agent implementation
-├── app.py           # Streamlit interface
-├── ml_logic.py      # Text classification model
-├── tests.py         # Automated tests
-├── .env             # Environment variables (create this)
-├── .gitignore       # Git ignore file
-├── requirements.txt # Dependencies
-├── setup.sh         # Setup script
-└── README.md        # Documentation
-```
-
-### Running Tests
-
+### 1. Analytics Dashboard
 ```bash
-python -m unittest tests.py
+streamlit run report.py
 ```
+Provides detailed metrics, visualizations, and batch processing capabilities.
+
+### 2. Programmatic API Examples
+```bash
+python api.py
+```
+Demonstrates how to use the classification system programmatically.
+
+### 3. Data Utilities
+```bash
+python data_utils.py
+```
+Tools for exporting classification results and model statistics.
+
+## Development Process
+
+This project was built using Cursor AI to demonstrate how modern AI-assisted development can accelerate creation of complex applications. The entire development process took place in a single session, including:
+
+1. Setting up the core architecture
+2. Implementing the ML classification system
+3. Building the LLM integration
+4. Creating a responsive UI
+5. Adding comprehensive testing
+6. Implementing data analysis features
+7. Writing detailed documentation
+
+This approach showcases the potential of AI-assisted coding for rapid prototyping and development of production-ready applications.
+
+## Documentation
+
+For comprehensive documentation of all features and components, see the [DOCUMENTATION.md](DOCUMENTATION.md) file.
 
 ## Roadmap
 
@@ -150,4 +163,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [Groq](https://groq.com/) for their powerful LLM API
 - [LangChain](https://langchain.com/) for the LLM framework
 - [scikit-learn](https://scikit-learn.org/) for the ML tools
-- [Streamlit](https://streamlit.io/) for the web application framework 
+- [Streamlit](https://streamlit.io/) for the web application framework
+- [Cursor](https://cursor.sh/) for the AI-powered development environment
