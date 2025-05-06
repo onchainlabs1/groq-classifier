@@ -32,7 +32,7 @@ This project was created as a speed-coding challenge to test the limits of AI-as
 ## 🎮 Live Demo
 
 Try the application live on Streamlit Cloud:
-[**Groq Classifier App**](https://groq-classifier.streamlit.app) <!-- Update with your actual Streamlit Cloud URL -->
+[**Groq Classifier App**](https://groq-classifier-ay4byyvdhkb5seeiatpbnt.streamlit.app/) 
 
 ![App Demo](https://via.placeholder.com/800x400?text=Groq+Classifier+Demo)
 <!-- Replace the placeholder above with an actual screenshot or GIF of your application -->
