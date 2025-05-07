@@ -34,8 +34,10 @@ This project was created as a speed-coding challenge to test the limits of AI-as
 Try the application live on Streamlit Cloud:
 [**Groq Classifier App**](https://groq-classifier-ay4byyvdhkb5seeiatpbnt.streamlit.app/) 
 
-![App Demo](https://via.placeholder.com/800x400?text=Groq+Classifier+Demo)
-<!-- Replace the placeholder above with an actual screenshot or GIF of your application -->
+<div align="center">
+  <img src="https://github.com/onchainlabs1/groq-classifier/assets/screenshot1.png" alt="Application Interface" width="80%"/>
+  <p><em>The Groq Classifier interface with text classification and LLM capabilities</em></p>
+</div>
 
 ## ✨ What Was Built in Under 60 Minutes
 
@@ -47,12 +49,16 @@ The challenge produced a surprisingly complete application with:
 - **Sentiment Analysis**: Positive/negative sentiment detection
 - **Question Recognition**: Automatic detection of questions
 - **Confidence Scoring**: Uncertainty detection for low-confidence predictions
+- **Model Persistence**: Save and load trained models for faster inference
+- **Cross-Validation**: Evaluate model performance with proper metrics
 
 ### 📊 Data & Analytics
 - **Interactive Dashboard**: Visual analytics of classification results
 - **Batch Processing**: Process multiple texts at once
 - **Data Export**: Save and analyze classification results
 - **Classifier Statistics**: Visual insights into the ML model
+- **Performance Metrics**: View detailed model performance metrics by category
+- **CSV Upload**: Upload CSV files for batch processing
 
 ### 🛠️ Technical Features
 - **Direct API Integration**: Enter Groq API key directly in the interface
@@ -60,15 +66,22 @@ The challenge produced a surprisingly complete application with:
 - **API Examples**: Programmatic usage documentation
 - **Automated Tests**: Unit tests for all components
 - **Comprehensive Docs**: Full documentation of all features
+- **Tabbed Interface**: Organized functionality in intuitive tabs
 
 ## 🔍 Classification Categories
 
-The classifier can instantly identify four different types of text:
+The classifier can instantly identify five different types of text:
 
 - 😊 **Positive**: Identifies positive sentiment in text
 - 😠 **Negative**: Identifies negative sentiment in text
 - ❓ **Questions**: Identifies queries seeking information
 - ℹ️ **Informational**: Identifies factual statements
+- 🔍 **Neutral**: Identifies neutral or ambiguous statements
+
+<div align="center">
+  <img src="https://github.com/onchainlabs1/groq-classifier/assets/screenshot2.png" alt="Classification Result" width="70%"/>
+  <p><em>Example of text classification with sentiment detection</em></p>
+</div>
 
 ## ⚙️ Tech Stack Built in 60 Minutes
 
@@ -124,6 +137,13 @@ Beyond the main classifier interface, this 60-minute challenge produced:
 | **Analytics Dashboard** | `streamlit run report.py` | Data visualization and batch processing tools |
 | **API Examples** | `python api.py` | Demonstrates programmatic usage |
 | **Data Utilities** | `python data_utils.py` | Tools for exporting and analyzing results |
+| **Model Metrics** | In app.py (Metrics tab) | View model performance and evaluation metrics |
+| **Batch Processing** | In app.py (Batch tab) | Process multiple texts or CSV files at once |
+
+<div align="center">
+  <img src="https://github.com/onchainlabs1/groq-classifier/assets/screenshot3.png" alt="Analytics Dashboard" width="80%"/>
+  <p><em>The data analytics dashboard showing classification statistics</em></p>
+</div>
 
 ## ⏱️ Hour-by-Hour Development
 
@@ -137,6 +157,7 @@ The entire project was built in a single development session, with tasks complet
 | **0:30-0:40** | Streamlit UI and responsive design |
 | **0:40-0:50** | Data analytics, visualization, and batch tools |
 | **0:50-0:60** | Documentation, tests, and final touches |
+| **Post-Challenge** | Enhanced classifier with new category, model persistence, and performance metrics |
 
 ## 🧪 The Challenge Method
 
@@ -163,16 +184,17 @@ You can deploy this project to Streamlit Cloud in minutes:
 
 For comprehensive documentation of all features and components developed during this 1-hour challenge, see the [DOCUMENTATION.md](DOCUMENTATION.md) file.
 
-## 🔮 Future Improvements
+## 🔮 Recent Improvements
 
-If we had more than 60 minutes, here's what we'd add:
+Since the initial 60-minute challenge, we've added several enhancements:
 
-- [ ] Advanced ML models with fine-tuning capabilities
-- [ ] Multi-language support
-- [ ] User feedback loop for continuous improvement
-- [ ] Visualization of classification confidence
-- [ ] Docker containerization
-- [ ] CI/CD pipeline
+- [x] **New "Neutral" Category**: Better handling of neutral or ambiguous text
+- [x] **Model Persistence**: Save and load trained models for faster inference
+- [x] **Cross-Validation**: Proper evaluation of model performance
+- [x] **Tabbed Interface**: More organized application layout
+- [x] **Performance Metrics**: Visual representation of model accuracy
+- [x] **Enhanced Preprocessing**: Better text normalization and contraction handling
+- [x] **Batch Processing Tab**: Process multiple texts or CSV files at once
 
 ## 🙏 Acknowledgments
 

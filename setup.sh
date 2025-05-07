@@ -20,4 +20,9 @@ fi
 echo "Installing dependencies..."
 pip install -r requirements.txt
 
+# Create necessary directories
+echo "Creating project directories..."
+mkdir -p models
+mkdir -p data
+
 echo "Setup complete! You can now run: streamlit run app.py" 
