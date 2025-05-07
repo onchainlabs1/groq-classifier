@@ -35,7 +35,7 @@ Try the application live on Streamlit Cloud:
 [**Groq Classifier App**](https://groq-classifier-ay4byyvdhkb5seeiatpbnt.streamlit.app/) 
 
 <div align="center">
-  <img src="https://github.com/onchainlabs1/groq-classifier/assets/screenshot1.png" alt="Application Interface" width="80%"/>
+  <img src="screenshots/home.17.png" alt="Application Interface" width="80%"/>
   <p><em>The Groq Classifier interface with text classification and LLM capabilities</em></p>
 </div>
 
@@ -79,8 +79,8 @@ The classifier can instantly identify five different types of text:
 - 🔍 **Neutral**: Identifies neutral or ambiguous statements
 
 <div align="center">
-  <img src="https://github.com/onchainlabs1/groq-classifier/assets/screenshot2.png" alt="Classification Result" width="70%"/>
-  <p><em>Example of text classification with sentiment detection</em></p>
+  <img src="screenshots/positive.png" alt="Positive Classification Result" width="70%"/>
+  <p><em>Example of positive sentiment classification detection</em></p>
 </div>
 
 ## ⚙️ Tech Stack Built in 60 Minutes
@@ -92,6 +92,11 @@ The classifier can instantly identify five different types of text:
 | **Data** | [Pandas](https://pandas.pydata.org/), [Matplotlib](https://matplotlib.org/) |
 | **DevOps** | Python virtual environments, [GitHub](https://github.com/) |
 | **Development** | [Cursor AI](https://cursor.sh/) - AI-powered code editor |
+
+<div align="center">
+  <img src="screenshots/negative.52.png" alt="Negative Classification Result" width="80%"/>
+  <p><em>Example of negative sentiment classification detection</em></p>
+</div>
 
 ## 🚀 Quick Start
 

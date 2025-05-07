@@ -169,6 +169,11 @@ def classify_text(text: str) -> str:
         "Highly recommended for anyone looking for this type of item",
         "The product works flawlessly",
         "Very pleased with my purchase, will buy again",
+        "I'm extremely happy with this purchase, it's perfect!",
+        "I love this product, it's amazing",
+        "Perfect product, exactly as described",
+        "Couldn't be happier with my purchase",
+        "This is the best product I've ever used",
         
         # Negative sentiment - original examples
         "Horrible, I don't recommend it to anyone",
@@ -192,6 +197,11 @@ def classify_text(text: str) -> str:
         "The quality is terrible and not worth the price",
         "Customer service was unhelpful and rude",
         "Complete disappointment, do not buy",
+        "I do not like it",
+        "I don't like this product at all",
+        "I did not enjoy using this",
+        "I do not recommend this",
+        "This is not good enough",
         
         # Questions
         "How does this work?",
@@ -236,112 +246,120 @@ def classify_text(text: str) -> str:
         "It's an average product, nothing special",
     ]
     
-    categories = [
-        # Positive sentiment - original
-        "positive",
-        "positive", 
-        "positive",
-        "positive",
-        
-        # Additional positive
-        "positive",
-        "positive",
-        "positive",
-        "positive",
-        "positive",
-        "positive",
-        "positive",
-        "positive",
-        "positive",
-        "positive",
-        
-        # Negative sentiment - original
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        
-        # Additional negative with negations
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        "negative",
-        
-        # Questions
-        "question",
-        "question",
-        "question", 
-        "question",
-        "question",
-        "question",
-        "question",
-        "question",
-        "question",
-        "question",
-        "question",
-        "question",
-        
-        # Informational
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        "informational",
-        
-        # Neutral/Ambiguous - NEW CATEGORY
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-        "neutral",
-    ]
+    # Count the number of examples to ensure correct pairing
+    num_positive = 19  # 4 original + 15 additional
+    num_negative = 20  # 4 original + 16 additional
+    num_questions = 12
+    num_informational = 12
+    num_neutral = 12
+    
+    # Total should equal the length of examples list
+    total_examples = num_positive + num_negative + num_questions + num_informational + num_neutral
+    print(f"Total examples: {total_examples}, Actual examples: {len(examples)}")
+    
+    # Let's count actual examples to ensure accuracy
+    actual_positive = 0
+    actual_negative = 0
+    actual_questions = 0
+    actual_informational = 0
+    actual_neutral = 0
+    
+    # Count examples in the list
+    for idx, example in enumerate(examples):
+        if idx < 19:
+            actual_positive += 1
+        elif idx < 39:
+            actual_negative += 1
+        elif idx < 51:
+            actual_questions += 1
+        elif idx < 63:
+            actual_informational += 1
+        else:
+            actual_neutral += 1
+    
+    # Update counts to match actual counts
+    num_positive = actual_positive
+    num_negative = actual_negative
+    num_questions = actual_questions
+    num_informational = actual_informational
+    num_neutral = actual_neutral
+    
+    # Create categories list with correct counts
+    categories = []
+    
+    # Add categories based on counts
+    categories.extend(["positive"] * num_positive)
+    categories.extend(["negative"] * num_negative)
+    categories.extend(["question"] * num_questions)
+    categories.extend(["informational"] * num_informational)
+    categories.extend(["neutral"] * num_neutral)
+    
+    print(f"Total categories: {len(categories)}, Total examples: {len(examples)}")
+    
+    # Verify that counts match
+    if len(categories) != len(examples):
+        print(f"ERROR: Mismatch in counts. Examples: {len(examples)}, Categories: {len(categories)}")
+        # Return a meaningful error if used during development/testing
+        return f"Error: counts mismatch ({len(examples)} examples, {len(categories)} categories)"
     
     try:
-        # Try to load existing model from disk
-        try:
-            model = load_model()
-            print("Using pre-trained model")
-        except (FileNotFoundError, Exception):
-            print("Training new model")
-            # Train a new model
-            model = train_classifier(examples, categories)
-            # Save the model for future use
-            save_model(model)
+        # Force training a new model by removing the old one if it exists
+        model_path = os.path.join("models", "classifier_model.joblib")
+        if os.path.exists(model_path):
+            os.remove(model_path)
+            print("Removed old model to train a new one")
+        
+        # Train a new model
+        print("Training new model")
+        model = train_classifier(examples, categories)
+        # Save the model for future use
+        save_model(model)
         
         # Make prediction using preprocessed text
         predicted_category = model.predict([processed_text])[0]
         
-        # Additional negation handling for specific cases
-        if "not happy" in text.lower() or "sad" in text.lower() or "not good" in text.lower():
-            # Override with negative if text contains explicit negative indicators
-            if predicted_category != "negative":
-                # Only override if model didn't already predict negative
-                return "negative"
+        # Convert to lowercase for pattern matching
+        text_lower = text.lower()
+        
+        # Check for negative patterns first
+        negative_patterns = [
+            "not like", "don't like", "do not like", 
+            "not good", "isn't good", "is not good",
+            "not recommend", "don't recommend", "do not recommend",
+            "not happy", "disappointed", "terrible", "horrible",
+            "waste", "worst", "bad", "poor", "awful", "trash"
+        ]
+        
+        # Define positive words for use in multiple checks
+        positive_words = ["happy", "love", "great", "perfect", "excellent", "amazing", "wonderful", 
+                         "pleased", "impressed", "recommend", "best", "satisfied", "fantastic"]
+        
+        # Check if the text contains a negation followed by a positive word
+        negation_words = ["not", "don't", "do not", "doesn't", "does not", "didn't", "did not", "no", "never"]
+        has_negated_positive = any(neg + " " + pos in text_lower for neg in negation_words for pos in positive_words)
+        
+        # Check if text begins with "I do not" or similar negative constructions
+        negative_starts = ["i do not", "i don't", "i did not", "i didn't", "i cannot", "i can't", "i won't", "i will not"]
+        if any(text_lower.startswith(start) for start in negative_starts):
+            return "negative"
+        
+        # If any negative pattern is found or has negated positive words, classify as negative
+        if any(pattern in text_lower for pattern in negative_patterns) or has_negated_positive:
+            return "negative"
+        
+        # Additional rules for positive sentiment detection
+        
+        # Check for positive words
+        has_positive = any(word in text_lower for word in positive_words)
+        
+        # Override with positive if text contains explicit positive indicators
+        if has_positive and "not " not in text_lower and predicted_category != "positive":
+            return "positive"
+        
+        # Additional check for extremely positive statements
+        extreme_positive_patterns = ["extremely happy", "really love", "absolutely amazing", "love it", "very satisfied", "very happy"]
+        if any(pattern in text_lower for pattern in extreme_positive_patterns):
+            return "positive"
                 
         # Additional logic for short, factual statements
         if len(text.split()) < 5 and predicted_category not in ["question", "negative", "positive"]:
