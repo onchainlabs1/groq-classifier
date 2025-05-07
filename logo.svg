@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80">
+  <!-- Background with rounded corners -->
+  <rect width="100%" height="100%" rx="10" ry="10" fill="#1E1F2B"/>
+  
+  <!-- Gradient for the icon -->
+  <defs>
+    <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4776E6"/>
+      <stop offset="100%" style="stop-color:#8E54E9"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Main icon circle with gradient -->
+  <circle cx="40" cy="40" r="22" fill="url(#circleGradient)"/>
+  
+  <!-- Highlight on the circle -->
+  <circle cx="32" cy="32" r="8" fill="#ffffff" opacity="0.3"/>
+  
+  <!-- Text with better styling -->
+  <text x="72" y="35" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white">Groq</text>
+  <text x="72" y="55" font-family="Arial, sans-serif" font-size="16" fill="#a8b2d1">Classifier</text>
+  
+  <!-- Subtle accent line -->
+  <line x1="70" y1="40" x2="170" y2="40" stroke="#4B8BF5" stroke-width="1" opacity="0.6"/>
+</svg> 

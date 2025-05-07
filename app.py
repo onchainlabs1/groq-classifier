@@ -21,52 +21,119 @@ st.set_page_config(
 def add_custom_css():
     st.markdown("""
     <style>
+    /* Global styles and typography */
+    body {
+        font-family: 'Inter', sans-serif;
+        color: #E0E0E0;
+    }
+    
+    /* Header styles */
     .main-header {
         font-size: 2.5rem;
         color: #4B8BF5;
         text-align: center;
         margin-bottom: 1rem;
     }
+    
     .sub-header {
         font-size: 1.5rem;
         color: #5C5C5C;
         margin-bottom: 1.5rem;
     }
+    
+    /* Category box styles with enhanced shadows */
     .category-box {
         padding: 1.5rem;
-        border-radius: 0.5rem;
+        border-radius: 0.8rem;
         margin-bottom: 1rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
     }
+    
+    .category-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+    }
+    
+    /* Enhanced category colors */
     .positive-box {
-        background-color: #43a047 !important;
-        border: 2px solid #1b5e20;
+        background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%) !important;
+        border: none;
         color: #fff !important;
     }
+    
     .negative-box {
-        background-color: #ff4d4f !important;
-        border: 2px solid #b71c1c;
+        background: linear-gradient(135deg, #ff4d4f 0%, #c62828 100%) !important;
+        border: none;
         color: #fff !important;
     }
+    
     .question-box {
-        background-color: #1976d2 !important;
-        border: 2px solid #0d47a1;
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
+        border: none;
         color: #fff !important;
     }
+    
     .informational-box {
-        background-color: #8e24aa !important;
-        border: 2px solid #4a148c;
+        background: linear-gradient(135deg, #8e24aa 0%, #4a148c 100%) !important;
+        border: none;
         color: #fff !important;
     }
+    
     .neutral-box {
-        background-color: #757575 !important;
-        border: 2px solid #212121;
+        background: linear-gradient(135deg, #757575 0%, #424242 100%) !important;
+        border: none;
         color: #fff !important;
     }
+    
     .uncertain-box {
-        background-color: #ffc107 !important;
-        border: 2px solid #ff9800;
+        background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%) !important;
+        border: none;
         color: #212121 !important;
+    }
+    
+    /* Logo container styles */
+    .app-logo {
+        margin-bottom: 1.5rem;
+        width: 100%;
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+    }
+    
+    /* Button enhancements */
+    button {
+        border-radius: 0.5rem !important;
+        font-weight: 500 !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+    }
+    
+    button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+    }
+    
+    /* Input field improvements */
+    .stTextInput, .stTextArea {
+        border-radius: 0.5rem !important;
+    }
+    
+    /* Download link styling */
+    .download-link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+        color: white !important;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    
+    .download-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     </style>
     """, unsafe_allow_html=True)
@@ -121,7 +188,15 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.image("https://www.groq.com/images/groq-logo.svg", width=200)
+        try:
+            # Try to use the local SVG logo
+            with open("logo.svg", "r") as f:
+                svg_content = f.read()
+                st.markdown(f'<div class="app-logo">{svg_content}</div>', unsafe_allow_html=True)
+        except:
+            # Fallback to Groq logo
+            st.image("https://www.groq.com/images/groq-logo.svg", width=200)
+            
         st.markdown("### About")
         st.markdown("""
         This application combines:
